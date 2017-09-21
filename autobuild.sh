@@ -28,7 +28,8 @@ read BUILD_CNT < $CNTR_FILE
 #     BUILD_CNT=0
 #     echo $BUILD_CNT > $CNTR_FILE
 # fi
-RUNABLE="!BaseCounter"
+RUNABLE='baseCounter'
+FINISHNAME='! BaseCounter'
 RUN="./$RUNABLE"
 CODE="."
 
@@ -79,6 +80,8 @@ do
             echo -e "\E[0;39m"
             if [[ "$ISRUN" == "true" ]] && [[ "$FORWIN" == "false" ]]; then
                 $RUN | tee $LOG_FILE &
+            else
+                mv "$RUNABLE.exe" "$FINISHNAME.exe"
             fi
         else
             ERROR_STATE=1
