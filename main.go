@@ -29,15 +29,6 @@ const (
 	winRunnableName = "! RatingPrints.exe"
 )
 
-type data struct {
-	Name        string
-	LastPrint   string
-	AVG         float64
-	Prints      int
-	TotalPrints int
-	Rating      int
-}
-
 func main() {
 
 	now := time.Now() //.Add(+time.Hour * 96 * 8) //test
@@ -56,7 +47,7 @@ func main() {
 	fmt.Printf("end\n")
 }
 
-// readData Чтение текущего состояния распечатанных файлов из файла "! AAA_2017.csv" где 2017 текущий год
+// readData Reading old results from file "! AAA_year.csv"
 func readData(fileName string, now time.Time) (printed map[string]data, err error) {
 	printed = make(map[string]data)
 
@@ -118,6 +109,7 @@ func readData(fileName string, now time.Time) (printed map[string]data, err erro
 	return printed, nil
 }
 
+// registrationPrinted View a current directory and files registration
 func registrationPrinted(printed_ *map[string]data, fileName string, now time.Time) error {
 
 	if printed_ == nil {
@@ -171,6 +163,7 @@ func registrationPrinted(printed_ *map[string]data, fileName string, now time.Ti
 	return nil
 }
 
+// writeDatas Save new state counters
 func writeDatas(printed_ *map[string]data, fileName string) error {
 
 	if printed_ == nil {
@@ -208,6 +201,16 @@ func writeDatas(printed_ *map[string]data, fileName string) error {
 	return nil
 }
 
+type data struct {
+	Name        string
+	LastPrint   string
+	AVG         float64
+	Prints      int
+	TotalPrints int
+	Rating      int
+}
+
+// Read Read and parse row data
 func (d *data) Read(row []string) (err error) {
 	if row == nil {
 		if err != nil {
@@ -244,6 +247,7 @@ func (d *data) Read(row []string) (err error) {
 	return nil
 }
 
+// Write Prepare data for write
 func (d *data) Write() (result []string) {
 	result = make([]string, 6)
 	result[0] = d.Name
