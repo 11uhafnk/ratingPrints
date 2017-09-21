@@ -28,8 +28,8 @@ read BUILD_CNT < $CNTR_FILE
 #     BUILD_CNT=0
 #     echo $BUILD_CNT > $CNTR_FILE
 # fi
-RUNABLE='baseCounter'
-FINISHNAME='! BaseCounter'
+RUNABLE='ratingPrints'
+FINISHNAME='! RatingPrints'
 RUN="./$RUNABLE"
 CODE="."
 

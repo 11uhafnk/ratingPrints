@@ -24,6 +24,11 @@ var (
 	varHeader = []string{"File name", "Last print", "Average print per days", "Count prints", "Total count prints", "Rating"}
 )
 
+const (
+	nixRunnableName = "ratingPrints"
+	winRunnableName = "! RatingPrints.exe"
+)
+
 type data struct {
 	Name        string
 	LastPrint   string
@@ -32,9 +37,6 @@ type data struct {
 	TotalPrints int
 	Rating      int
 }
-
-// data file
-// file name | date last print YYYY.MM.DD | AVG prints | count prints
 
 func main() {
 
@@ -135,9 +137,9 @@ func registrationPrinted(printed_ *map[string]data, fileName string, now time.Ti
 	}
 	for _, fi := range files {
 		if fi.IsDir() ||
-			fi.Name() == "baseCounter" ||
-			fi.Name() == "! BaseCounter.exe" ||
-			(len(fi.Name()) == 16 && fi.Name()[:8] == "printed_") ||
+			fi.Name() == nixRunnableName ||
+			fi.Name() == winRunnableName ||
+			(len(fi.Name()) == 14 && fi.Name()[:6] == "! AAA_") || // result files
 			(len(fi.Name()) > 0 && fi.Name()[:1] == ".") {
 			fmt.Println(fi.Name(), "skip")
 			continue
